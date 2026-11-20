@@ -1,0 +1,316 @@
+@import "tailwindcss";
+
+:root {
+  --lime: #c6ff3d;
+  --txt: #f1f3ee;
+  --mute: rgba(241, 243, 238, 0.55);
+  --line: rgba(241, 243, 238, 0.22);
+  --hue: 0deg;
+  --out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease: cubic-bezier(0.77, 0, 0.18, 1);
+  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #000000;
+  color: var(--txt);
+  font-family: 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
+  overscroll-behavior: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (pointer: fine) {
+  html,
+  body,
+  a,
+  button,
+  [role='button'] {
+    cursor: none !important;
+  }
+}
+
+@media (pointer: coarse) {
+  .kyne-cursor {
+    display: none !important;
+  }
+}
+
+.f-disp {
+  font-family: 'Unbounded', sans-serif;
+}
+
+.f-ui {
+  font-family: 'Inter Tight', sans-serif;
+}
+
+.f-mono {
+  font-family: 'JetBrains Mono', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.skew-head {
+  display: inline-block;
+  transform: skewX(-8deg);
+}
+
+/* Overflow mask for rising/falling text lines without clipping descenders */
+.ln {
+  overflow: hidden;
+  padding-bottom: 0.22em;
+  margin-bottom: -0.22em;
+}
+
+.ln > span {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+/* Radial lime glow behind stage */
+.stage-glow {
+  background: radial-gradient(
+    ellipse 62% 48% at 50% 60%,
+    rgba(198, 255, 61, 0.095) 0%,
+    rgba(198, 255, 61, 0.025) 45%,
+    transparent 74%
+  );
+  filter: hue-rotate(var(--hue));
+  transition: filter 450ms var(--out);
+}
+
+/* Wordmark & Quick Facts strip cropping + vertical feather mask */
+.strip-mask {
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 18%,
+    black 82%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 18%,
+    black 82%,
+    transparent 100%
+  );
+}
+
+.strip-img {
+  height: min(84vh, 46vw);
+  width: auto;
+  max-width: none;
+  margin-top: calc(-0.31 * min(84vh, 46vw));
+  margin-bottom: calc(-0.38 * min(84vh, 46vw));
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Detail image radial fade */
+.detail-radial-mask {
+  mask-image: radial-gradient(
+    ellipse 74% 72% at 54% 50%,
+    black 48%,
+    transparent 96%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 74% 72% at 54% 50%,
+    black 48%,
+    transparent 96%
+  );
+}
+
+/* Striped lime swatch */
+.lens-swatch {
+  background-image: repeating-linear-gradient(
+    90deg,
+    #c6ff3d 0px,
+    #c6ff3d 4px,
+    transparent 4px,
+    transparent 8px
+  );
+  filter: hue-rotate(var(--hue));
+  transition: filter 450ms var(--out);
+}
+
+/* Header nav wipe underline */
+.nav-wipe {
+  position: relative;
+}
+
+.nav-wipe::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 1px;
+  background: var(--lime);
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 320ms var(--out);
+}
+
+.nav-wipe:hover::after,
+.nav-wipe:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+/* Pre-order header pill hover */
+.preorder-pill {
+  transition: background-color 240ms var(--out), color 240ms var(--out), border-color 240ms var(--out);
+}
+
+.preorder-pill .arrow-chip {
+  transition: transform 280ms var(--out), background-color 240ms var(--out), color 240ms var(--out);
+}
+
+.preorder-pill:hover {
+  background-color: var(--lime);
+  border-color: var(--lime);
+  color: #000000;
+}
+
+.preorder-pill:hover .arrow-chip {
+  transform: rotate(-45deg);
+  background-color: #000000;
+  color: var(--lime);
+}
+
+/* Ping animations */
+@keyframes kyne-ping {
+  0% {
+    transform: scale(1);
+    opacity: 0.75;
+  }
+  80%,
+  100% {
+    transform: scale(2.35);
+    opacity: 0;
+  }
+}
+
+.kyne-ping {
+  animation: kyne-ping 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* RGB split icons & hover glitch skew */
+.rgb-icon {
+  filter: drop-shadow(-3px 0 0 rgba(255, 24, 58, 0.92)) drop-shadow(3px 0 0 rgba(0, 240, 255, 0.92));
+}
+
+@keyframes glitch-skew {
+  0% {
+    transform: skewX(0deg) scale(1.08);
+  }
+  20% {
+    transform: skewX(-16deg) translateX(-3px) scale(1.12);
+  }
+  40% {
+    transform: skewX(14deg) translateX(4px) scale(1.08);
+  }
+  60% {
+    transform: skewX(-8deg) translateX(-2px) scale(1.12);
+  }
+  80% {
+    transform: skewX(6deg) translateX(2px) scale(1.08);
+  }
+  100% {
+    transform: skewX(0deg) scale(1.08);
+  }
+}
+
+.lobe-icon-btn:hover .rgb-icon {
+  animation: glitch-skew 360ms steps(2, end) infinite;
+}
+
+/* Lens pop feedback */
+@keyframes lens-pop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.055);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.lens-pop-active {
+  animation: lens-pop 520ms var(--spring);
+}
+
+/* Scene 1 Hero sizing */
+.hero-plinth-wrap {
+  width: 100vw;
+  top: calc(74vh - 31vw);
+  left: 50%;
+}
+
+.hero-glasses-wrap {
+  width: 86vw;
+  top: calc(74vh - 9vw);
+  left: 50%;
+}
+
+.blob-wrap {
+  width: min(96vw, 1700px);
+  top: 41%;
+  left: 50%;
+}
+
+.detail-img-wrap {
+  width: 72vw;
+  right: -2vw;
+  top: 50%;
+}
+
+.detail-copy-wrap {
+  left: 2.2vw;
+  top: 30vh;
+  max-width: 34vw;
+}
+
+@media (max-width: 760px) {
+  .desk-only {
+    display: none !important;
+  }
+
+  .hero-plinth-wrap {
+    width: 170vw;
+    top: calc(72vh - 52vw);
+  }
+
+  .hero-glasses-wrap {
+    width: 150vw;
+    top: calc(72vh - 15vw);
+  }
+
+  .blob-wrap {
+    width: 150vw;
+    top: 40%;
+  }
+
+  .detail-copy-wrap {
+    left: 4.5vw;
+    right: 4.5vw;
+    top: calc(clamp(54px, 8.6vh, 80px) + 3.2vh);
+    max-width: none;
+  }
+
+  .detail-img-wrap {
+    width: 112vw;
+    right: auto;
+    left: 50%;
+    top: 66%;
+  }
+}

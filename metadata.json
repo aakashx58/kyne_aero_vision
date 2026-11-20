@@ -1,0 +1,6 @@
+{
+  "name": "KYNE AERO.VISION",
+  "description": "Liquid-chrome sport sunglasses — Drop 01 cinematic 4-scene product launch.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
