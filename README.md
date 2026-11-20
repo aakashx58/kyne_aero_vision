@@ -4,6 +4,8 @@
 
 AI Studio applet built with React 19, Vite, TypeScript, and Tailwind CSS, powered by the Gemini AI API.
 
+<img width="1918" height="891" alt="Screenshot 2026-11-20 180659" src="https://github.com/user-attachments/assets/f22f2c76-ef21-4f3d-b8e5-7d055de7c377" />
+
 ## Tech stack
 
 - [React 19](https://react.dev/) — UI framework
